@@ -61,7 +61,7 @@ namespace PasswordsManager.ViewModels
         }
         
 
-        private string _iconPath = "/icon/show.svg";
+        private string _iconPath = "/icon/show.svg"; // a faire : image source avec bitmap image
         public string IconPath
         {
             get

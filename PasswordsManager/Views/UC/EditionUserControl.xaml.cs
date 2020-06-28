@@ -55,6 +55,16 @@ namespace PasswordsManager.Views.UC
                         MessageBox.Show("Erreur lors de la modification de votre mot de passe, veuillez réessayer...", "Attention !", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
                     MainWindow.ViewModel.isEditionModeEnabled = false;
+                    MainWindow.ViewModel.passwords.Remove(_viewmodelMain);
+                    MainWindow.ViewModel.passwords.Add(new MainViewModel
+                    {
+                        Id = _viewmodel.Id,
+                        Pass = _viewmodel.EditionPass,
+                        Url = _viewmodel.EditionUrl,
+                        Login = _viewmodel.EditionLogin,
+                        Label = _viewmodel.EditionLabel
+                    });
+                    MainWindow.ViewModel.passwords.OrderByDescending(x => x.Id);
                 }
 
 
@@ -64,6 +74,11 @@ namespace PasswordsManager.Views.UC
                 MessageBox.Show("Veuillez remplir tous les champs..", "Attention !", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
+        }
+
+        private void btnGenerateEdited_Click(object sender, RoutedEventArgs e)
+        {
+            _viewmodel.EditionPass = Tool.RandomPassword(10);
         }
     }
 }
